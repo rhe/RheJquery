@@ -1,0 +1,31 @@
+{
+	"name": "rhe/rhe-jquery",
+	"description": "Module for zend framework 2 providing jQuery integration.",
+	"type": "library",
+	"keywords": [
+		"zf2",
+		"zend",
+		"module",
+		"jquery"
+	],
+	"homepage": "https://github.com/hawkoflight/RheJquery",
+	"authors": [
+		{
+			"name": "Robert Hennig",
+			"email": "info@robcoding.de",
+			"homepage": "http://www.robcoding.de"
+		}
+	],
+	"require": {
+		"php": ">=5.3.3",
+		"zendframework/zendframework": "dev-master"
+	},
+	"autoload": {
+		"psr-0": {
+			"RheJquery": "src/"
+		},
+		"classmap": [
+			"./"
+		]
+	}
+}
