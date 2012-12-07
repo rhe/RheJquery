@@ -820,11 +820,11 @@ class DataTables {
 	 */
 	public function setBJQueryUI($bJQueryUI) {
 		if($bJQueryUI == true) {
-			if($this->getSDom() == '' || $this->getSDom() == 'lfrtip') {
+			if($this->getSDom() == '' || $this->getSDom() != '<"H"lfr>t<"F"ip>') {
 				$this->setSDom('<"H"lfr>t<"F"ip>');
 			}
 		} else {
-			if($this->getSDom() == '' || $this->getSDom() == '<"H"lfr>t<"F"ip>') {
+			if($this->getSDom() == '' || $this->getSDom() != 'lfrtip') {
 				$this->setSDom('lfrtip');
 			}
 		}
@@ -1833,7 +1833,7 @@ class DataTables {
 	 */
 	public static function factory($options) {
 		if($options instanceof \Traversable) {
-			$options = ArrayUtils::iteratorToArray(options);
+			$options = ArrayUtils::iteratorToArray($options);
 		} elseif(!is_array($options)) {
 			throw new \Exception(sprintf(
 				'%s expects an array or Traversable object; received "%s"',

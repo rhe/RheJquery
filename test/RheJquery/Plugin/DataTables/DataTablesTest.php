@@ -128,11 +128,87 @@ class DataTablesTest extends TestCase {
 	}
 	
 	public function testFactorySetsValuesCorrectly() {
+		// test with array
 		$dataTables = DataTables::factory($this->_propertyValues);
 		foreach($this->_propertyValues as $k => $v) {
 			$method = 'get'.ucfirst($k);
 			$actual = call_user_func(array($dataTables, $method));
 			$this->assertEquals($v, $actual, "'$k' expected '$v'");
 		}
+		// test with object
+		$testObject = new DataTablesTestTestObject($this->_propertyValues);
+		$this->assertInstanceOf('\Traversable', $testObject);
+		$dataTables->factory($testObject);
+		foreach($this->_propertyValues as $k => $v) {
+			$method = 'get'.ucfirst($k);
+			$actual = call_user_func(array($dataTables, $method));
+			$this->assertEquals($v, $actual, "'$k' expected '$v'");
+		}
+	}
+	
+	/**
+	 * @expectedException Exception
+	 */
+	public function testFactoryThrowsExceptionIfNotArrayAndNotTraversable() {
+		DataTables::factory('test');	
+	}
+	
+	/**
+	 * @expectedException Exception
+	 */
+	public function testFactoryThrowsExceptionOnInvalidProperty() {
+		DataTables::factory(array('unknown' => 1));	
+	}
+	
+	public function testSetBJQueryUISetsSDomCorrectly() {		
+		$dataTables = new DataTables();
+		
+		// Initial state
+		$this->assertFalse($dataTables->getBJQueryUI());
+		$this->assertEquals('lfrtip', $dataTables->getSDom());
+		
+		// unset sDom and set bJQueryUI to false
+		$dataTables->setSDom('');
+		$dataTables->setBJQueryUI(false);
+		$this->assertFalse($dataTables->getBJQueryUI());
+		$this->assertEquals('lfrtip', $dataTables->getSDom());
+		
+		// set bJQueryUI to true
+		$dataTables->setBJQueryUI(true);
+		$this->assertEquals('<"H"lfr>t<"F"ip>', $dataTables->getSDom());
+	}
+}
+
+class DataTablesTestTestObject implements \Iterator {
+	private $_data;
+	private $_keys;
+	private $_key;
+	
+	public function __construct($data) {
+		$this->_data = $data;
+		$this->_keys = array_keys($data);
+		$this->_key = current($this->_keys);
+	}
+	
+	public function rewind() {
+		reset($this->_data);
+		reset($this->_keys);
+		$this->_key = current($this->_keys);
+	}
+	
+	public function current() {
+		return $this->_data[$this->_key];
+	}
+	
+	public function key() {
+		return $this->_key;
+	}
+	
+	public function next() {
+		$this->_key = next($this->_keys);
+	}
+	
+	public function valid() {
+		return isset($this->_data[$this->_key]);
 	}
 }
