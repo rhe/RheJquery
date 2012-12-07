@@ -5,6 +5,7 @@ use PHPUnit_Framework_TestCase as TestCase;
 
 class DataTablesTest extends TestCase {
 	protected $_propertyDefaults = array(
+		'name' => 'dataTable',
 		'bAutoWidth' => true,
 		'bDeferRender' => false,
 		'bFilter' => true,
@@ -61,6 +62,7 @@ class DataTablesTest extends TestCase {
 	);
 
 	protected $_propertyValues = array(
+		'name' => 'testTable',
 		'bAutoWidth' => false,
 		'bDeferRender' => true,
 		'bFilter' => false,
