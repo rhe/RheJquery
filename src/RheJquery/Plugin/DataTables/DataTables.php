@@ -366,7 +366,7 @@ class DataTables {
 	 * 
 	 * @var string
 	 */
-	protected $_oSearch = '';
+	protected $_oSearch = null;
 	
 	/**
 	 * Ajax Data Property.
@@ -399,7 +399,7 @@ class DataTables {
 	 * 
 	 * @var string
 	 */
-	protected $_sCookiePrefix = 'SpryMedia_DataTables';
+	protected $_sCookiePrefix = 'SpryMedia_DataTables_';
 	
 	/**
 	 * This initialisation variable allows you to specify exactly where in the 
@@ -1485,7 +1485,7 @@ class DataTables {
 	 * @return string
 	 */
 	public function getFnFooterCallback() {
-		return $this->_getFnFooterCallback();
+		return $this->_fnFooterCallback;
 	}
 	
 	/**
