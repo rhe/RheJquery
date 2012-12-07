@@ -130,7 +130,7 @@ class DataTablesTest extends TestCase {
 		foreach($this->_propertyValues as $k => $v) {
 			$method = 'get'.ucfirst($k);
 			$actual = call_user_func(array($dataTables, $method));
-			$this->assertEquals($v, $actual, "'$k' expected 'v'");
+			$this->assertEquals($v, $actual, "'$k' expected '$v'");
 		}
 	}
 }
