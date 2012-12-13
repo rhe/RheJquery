@@ -3,7 +3,7 @@ namespace RheJquery\Plugin\DataTables;
 
 use PHPUnit_Framework_TestCase as TestCase;
 
-class DataTablesTest extends TestCase {
+class DataTableTest extends TestCase {
 	protected $_propertyDefaults = array(
 		'name' => 'dataTable',
 		'bAutoWidth' => true,
@@ -35,7 +35,7 @@ class DataTablesTest extends TestCase {
 		'oSearch' => null,
 		'sAjaxDataProp' => 'aaData',
 		'sAjaxSource' => null,
-		'sCookiePrefix' => 'SpryMedia_DataTables_',
+		'sCookiePrefix' => 'SpryMedia_DataTable_',
 		'sDom' => 'lfrtip',
 		'sPaginationType' => 'two_button',
 		'sScrollXInner' => '',
@@ -99,12 +99,12 @@ class DataTablesTest extends TestCase {
 		'sServerMethod' => 'POST',
 		'fnCookieCallback' => 'return sName + "="+JSON.stringify(oData)+"; expires=" + sExpires +"; path=" + sPath;',
 		'fnCreatedRow' => 'if ( aData[4] == "A" ) { $(\'td:eq(4)\', nRow).html( \'<b>A</b>\' ); }',
-		'fnDrawCallback' => 'alert( \'DataTables has redrawn the table\' );',
+		'fnDrawCallback' => 'alert( \'DataTable has redrawn the table\' );',
 		'fnFooterCallback' => 'nFoot.getElementsByTagName(\'th\')[0].innerHTML = "Starting index is "+iStart;',
 		'fnFormatNumber' => 'if ( iIn < 1000 ) { return iIn; } else { var s=(iIn+""), a=s.split(""), out="", iLen=s.length; for ( var i=0 ; i<iLen ; i++ ) { if ( i%3 === 0 && i !== 0 ) { out = "\'"+out; } out = a[iLen-i-1]+out; } } return out;',
 		'fnHeaderCallback' => 'nHead.getElementsByTagName(\'th\')[0].innerHTML = "Displaying "+(iEnd-iStart)+" records";',
 		'fnInfoCallback' => 'return iStart +" to "+ iEnd;',
-		'fnInitComplete' => 'alert( \'DataTables has finished its initialisation.\' );',
+		'fnInitComplete' => 'alert( \'DataTable has finished its initialisation.\' );',
 		'fnPreDrawCallback' => 'if ( $(\'#test\').val() == 1 ) { return false; }',
 		'fnRowCallback' => 'if ( aData[4] == "A" ) { $(\'td:eq(4)\', nRow).html( \'<b>A</b>\' ); } }',
 		'fnServerData' => 'oSettings.jqXHR = $.ajax( { "dataType": \'json\', "type": "POST","url": sSource, "data": aoData, "success": fnCallback } );',
@@ -119,7 +119,7 @@ class DataTablesTest extends TestCase {
 	);
 		
 	public function testInitialValuesAreCorrect() {
-		$dataTables = new DataTables();
+		$dataTables = new DataTable();
 		foreach($this->_propertyDefaults as $k => $v) {
 			$method = 'get'.ucfirst($k);
 			$actual = call_user_func(array($dataTables, $method));
@@ -129,14 +129,14 @@ class DataTablesTest extends TestCase {
 	
 	public function testFactorySetsValuesCorrectly() {
 		// test with array
-		$dataTables = DataTables::factory($this->_propertyValues);
+		$dataTables = DataTable::factory($this->_propertyValues);
 		foreach($this->_propertyValues as $k => $v) {
 			$method = 'get'.ucfirst($k);
 			$actual = call_user_func(array($dataTables, $method));
 			$this->assertEquals($v, $actual, "'$k' expected '$v'");
 		}
 		// test with object
-		$testObject = new DataTablesTestTestObject($this->_propertyValues);
+		$testObject = new DataTableTestTestObject($this->_propertyValues);
 		$this->assertInstanceOf('\Traversable', $testObject);
 		$dataTables->factory($testObject);
 		foreach($this->_propertyValues as $k => $v) {
@@ -150,18 +150,18 @@ class DataTablesTest extends TestCase {
 	 * @expectedException Exception
 	 */
 	public function testFactoryThrowsExceptionIfNotArrayAndNotTraversable() {
-		DataTables::factory('test');	
+		DataTable::factory('test');	
 	}
 	
 	/**
 	 * @expectedException Exception
 	 */
 	public function testFactoryThrowsExceptionOnInvalidProperty() {
-		DataTables::factory(array('unknown' => 1));	
+		DataTable::factory(array('unknown' => 1));	
 	}
 	
 	public function testSetBJQueryUISetsSDomCorrectly() {		
-		$dataTables = new DataTables();
+		$dataTables = new DataTable();
 		
 		// Initial state
 		$this->assertFalse($dataTables->getBJQueryUI());
@@ -179,7 +179,7 @@ class DataTablesTest extends TestCase {
 	}
 }
 
-class DataTablesTestTestObject implements \Iterator {
+class DataTableTestTestObject implements \Iterator {
 	private $_data;
 	private $_keys;
 	private $_key;

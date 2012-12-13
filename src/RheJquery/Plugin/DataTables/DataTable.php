@@ -8,7 +8,7 @@ namespace RheJquery\Plugin\DataTables;
 use Zend\Stdlib\ArrayUtils;
 
 /**
- * DataTables server side representation.
+ * DataTable server side representation.
  *
  * This represents a data table on the server side and allows to configure
  * all data table options and to build the neccessary HTML and JavaScript.
@@ -16,7 +16,7 @@ use Zend\Stdlib\ArrayUtils;
  * @author Robert Hennig <info@robcoding.de>
  * @copyright Copyright (c) 2012 Robert Hennig <info@robcoding.de>
  */
-class DataTables {
+class DataTable {
 	/**
 	 * Pagination type two buttons.
 	 */
@@ -59,9 +59,9 @@ class DataTables {
 	/**
 	 * Toggles deferred rendering.
 	 * 
-	 * Deferred rendering can provide DataTables with a huge speed boost when 
+	 * Deferred rendering can provide DataTable with a huge speed boost when 
 	 * you are using an Ajax or JS data source for the table. This option, 
-	 * when set to true, will cause DataTables to defer the creation of the 
+	 * when set to true, will cause DataTable to defer the creation of the 
 	 * table elements for each row until they are needed for a draw - saving a 
 	 * significant amount of time.
 	 * 
@@ -72,11 +72,11 @@ class DataTables {
 	/**
 	 * Enable or disable filterning of data.
 	 * 
-	 * Filtering in DataTables is "smart" in that it allows the end user to 
+	 * Filtering in DataTable is "smart" in that it allows the end user to 
 	 * input multiple words (space separated) and will match a row containing 
 	 * those words, even if not in the order that was specified (this allow 
 	 * matching across multiple columns). Note that if you wish to use 
-	 * filtering in DataTables this must remain 'true' - to remove the default 
+	 * filtering in DataTable this must remain 'true' - to remove the default 
 	 * filtering input box and retain filtering abilities, please use 
 	 * {@link DataTable.defaults.sDom}.
 	 * 
@@ -99,7 +99,7 @@ class DataTables {
 	 * Enable or disable jQuery UI ThemeRoller support.
 	 * 
 	 * required as ThemeRoller requires some slightly different and 
-	 * additional mark-up from what DataTables has traditionally used.
+	 * additional mark-up from what DataTable has traditionally used.
 	 * 
 	 * @var boolean
 	 */
@@ -135,13 +135,13 @@ class DataTables {
 	protected $_bProcessing = false;
 	
 	/**
-	 * Enable infinite scrolling for DataTables (to be used in combination with 
+	 * Enable infinite scrolling for DataTable (to be used in combination with 
 	 * sScrollY).
 	 * 
-	 * Infinite scrolling means that DataTables will continually load data as 
+	 * Infinite scrolling means that DataTable will continually load data as 
 	 * a user scrolls through a table, which is very useful for large dataset. 
 	 * This cannot be used with pagination, which is automatically disabled. 
-	 * Note - the Scroller extra for DataTables is recommended in in preference 
+	 * Note - the Scroller extra for DataTable is recommended in in preference 
 	 * to this option.
 	 * 
 	 * @var boolean
@@ -149,10 +149,10 @@ class DataTables {
 	protected $_bScrollInfinite = false;
 	
 	/**
-	 * Configure DataTables to use server-side processing.
+	 * Configure DataTable to use server-side processing.
 	 * 
 	 * Note that the sAjaxSource parameter must also be given in order to give 
-	 * DataTables a source to obtain the required data for each draw.
+	 * DataTable a source to obtain the required data for each draw.
 	 * 
 	 * @var boolean
 	 */
@@ -231,12 +231,12 @@ class DataTables {
 	protected $_bDestroy = false;
 	
 	/**
-	 * Retrieve the DataTables object for the given selector. 
+	 * Retrieve the DataTable object for the given selector. 
 	 * 
 	 * Note that if the table has already been initialised, this parameter will 
-	 * cause DataTables to simply return the object that has already been set 
+	 * cause DataTable to simply return the object that has already been set 
 	 * up - it will not take account of any changes you might have made to the 
-	 * initialisation object passed to DataTables (setting this parameter to 
+	 * initialisation object passed to DataTable (setting this parameter to 
 	 * true is an acknowledgement that you understand this). bDestroy can be 
 	 * used to reinitialise a table if you need.
 	 * 
@@ -245,7 +245,7 @@ class DataTables {
 	protected $_bRetrieve = false;
 	
 	/**
-	 * Indicate if DataTables should be allowed to set the padding / margin etc 
+	 * Indicate if DataTable should be allowed to set the padding / margin etc 
 	 * for the scrolling header elements or not. 
 	 * 
 	 * Typically you will want this.
@@ -255,13 +255,13 @@ class DataTables {
 	protected $_bScrollAutoCss = true;
 	
 	/**
-	 * When vertical (y) scrolling is enabled, DataTables will force the height 
+	 * When vertical (y) scrolling is enabled, DataTable will force the height 
 	 * of the table's viewport to the given height at all times (useful for 
 	 * layout). 
 	 * 
 	 * However, this can look odd when filtering data down to a small data set, 
 	 * and the footer is left "floating" further down. This parameter (when 
-	 * enabled) will cause DataTables to collapse the table's viewport down 
+	 * enabled) will cause DataTable to collapse the table's viewport down 
 	 * when the result set will fit within the given Y height.
 	 * 
 	 * @var boolean
@@ -269,7 +269,7 @@ class DataTables {
 	protected $_bScrollCollapse = false;
 	
 	/**
-	 * Allows control over whether DataTables should use the top (true) unique 
+	 * Allows control over whether DataTable should use the top (true) unique 
 	 * cell that is found for a single column, or the bottom (false - default). 
 	 * 
 	 * This is useful when using complex headers.
@@ -290,11 +290,11 @@ class DataTables {
 	/**
 	 * Number of records overall and indicator to defer loading from server.
 	 * 
-	 * When enabled DataTables will not make a request to the server for the 
+	 * When enabled DataTable will not make a request to the server for the 
 	 * first page draw - rather it will use the data already on the page (no 
 	 * sorting etc will be applied to it), thus saving on an XHR at load time. 
 	 * iDeferLoading is used to indicate that deferred loading is required, but 
-	 * it is also used to tell DataTables how many records there are in the 
+	 * it is also used to tell DataTable how many records there are in the 
 	 * full table (allowing the information element and pagination to be 
 	 * displayed correctly). In the case where a filtering is applied to the 
 	 * table on initial load, this can be indicated by giving the parameter as 
@@ -317,7 +317,7 @@ class DataTables {
 	protected $_iDisplayLength = 10;
 	
 	/**
-	 * Define the starting point for data display when using DataTables with 
+	 * Define the starting point for data display when using DataTable with 
 	 * pagination. 
 	 * 
 	 * Note that this parameter is the number of records, rather than the page 
@@ -330,7 +330,7 @@ class DataTables {
 	
 	/**
 	 * The scroll gap is the amount of scrolling that is left to go before 
-	 * DataTables will load the next 'page' of data automatically. 
+	 * DataTable will load the next 'page' of data automatically. 
 	 * 
 	 * You typically want a gap which is big enough that the scrolling will be 
 	 * smooth for the user, while not so large that it will load more data than 
@@ -343,7 +343,7 @@ class DataTables {
 	/**
 	 * The tab index.
 	 * 
-	 * By default DataTables allows keyboard navigation of the table (sorting, 
+	 * By default DataTable allows keyboard navigation of the table (sorting, 
 	 * paging, and filtering) by adding a tabindex attribute to the required 
 	 * elements. This allows you to tab through the controls and press the 
 	 * enter key to activate them. The tabindex is default 0, meaning that the 
@@ -361,7 +361,7 @@ class DataTables {
 	 * defined, but all other parameters are optional. When "bRegex" is true, 
 	 * the search string will be treated as a regular expression, when false 
 	 * (default) it will be treated as a straight string. When "bSmart" 
-	 * DataTables will use it's smart filtering methods (to word match at any 
+	 * DataTable will use it's smart filtering methods (to word match at any 
 	 * point in the data), when false this will not be done.
 	 * 
 	 * @var string
@@ -371,7 +371,7 @@ class DataTables {
 	/**
 	 * Ajax Data Property.
 	 * 
-	 * By default DataTables will look for the property 'aaData' when obtaining 
+	 * By default DataTable will look for the property 'aaData' when obtaining 
 	 * data from an Ajax source or for server-side processing - this parameter 
 	 * allows that property to be changed. You can use Javascript dotted object 
 	 * notation to get a data source for multiple levels of nesting.
@@ -383,7 +383,7 @@ class DataTables {
 	/**
 	 * Ajax source.
 	 * 
-	 * You can instruct DataTables to load data from an external source using 
+	 * You can instruct DataTable to load data from an external source using 
 	 * this parameter (use aData if you want to pass data in you already have). 
 	 * Simply provide a url a JSON object can be obtained from. This object 
 	 * must include the parameter 'aaData' which is the data source for the 
@@ -395,15 +395,15 @@ class DataTables {
 	
 	/**
 	 * This parameter can be used to override the default prefix that 
-	 * DataTables assigns to a cookie when state saving is enabled.
+	 * DataTable assigns to a cookie when state saving is enabled.
 	 * 
 	 * @var string
 	 */
-	protected $_sCookiePrefix = 'SpryMedia_DataTables_';
+	protected $_sCookiePrefix = 'SpryMedia_DataTable_';
 	
 	/**
 	 * This initialisation variable allows you to specify exactly where in the 
-	 * DOM you want DataTables to inject the various controls it adds to the 
+	 * DOM you want DataTable to inject the various controls it adds to the 
 	 * page (for example you might want the pagination controls at the top of 
 	 * the table). DIV elements (with or without a custom class) can also be 
 	 * added to aid styling. The follow syntax is used:
@@ -446,7 +446,7 @@ class DataTables {
 	/**
 	 * Pagination interaction method.
 	 * 
-	 * DataTables features two different built-in pagination interaction 
+	 * DataTable features two different built-in pagination interaction 
 	 * methods ('twobutton' or 'fullnumbers') which present different page 
 	 * controls to the end user. Further methods can be added using the API 
 	 * (see below).
@@ -478,7 +478,7 @@ class DataTables {
 	
 	/**
 	 * Customise the cookie and / or the parameters being stored when using 
-	 * DataTables with state saving enabled. 
+	 * DataTable with state saving enabled. 
 	 * 
 	 * This function is called whenever the cookie is modified, and it expects 
 	 * a fully formed cookie string to be returned. Note that the data object 
@@ -516,10 +516,10 @@ class DataTables {
 	
 	/**
 	 * When rendering large numbers in the information element for the table 
-	 * (i.e. "Showing 1 to 10 of 57 entries") DataTables will render large 
+	 * (i.e. "Showing 1 to 10 of 57 entries") DataTable will render large 
 	 * numbers to have a comma separator for the 'thousands' units (e.g. 1 
 	 * million is rendered as "1,000,000") to help readability for the end 
-	 * user. This function will override the default method DataTables uses.
+	 * user. This function will override the default method DataTable uses.
 	 * 
 	 * @var string
 	 */
@@ -538,7 +538,7 @@ class DataTables {
 	 * The information element can be used to convey information about the 
 	 * current state of the table. 
 	 * 
-	 * Although the internationalisation options presented by DataTables are 
+	 * Although the internationalisation options presented by DataTable are 
 	 * quite capable of dealing with most customisations, there may be times 
 	 * where you wish to customise the string further. This callback allows you 
 	 * to do exactly that.
@@ -550,7 +550,7 @@ class DataTables {
 	/**
 	 * Called when the table has been initialised. 
 	 * 
-	 * Normally DataTables will initialise sequentially and there will be no 
+	 * Normally DataTable will initialise sequentially and there will be no 
 	 * need for this function, however, this does not hold true when using 
 	 * external language information since that is obtained using an async 
 	 * XHR call.
@@ -593,7 +593,7 @@ class DataTables {
 	 * request - for example custom filtering information, and this callback 
 	 * function makes it trivial to send extra information to the server. 
 	 * The passed in parameter is the data set that has been constructed by 
-	 * DataTables, and you can add to this or modify it as you require.
+	 * DataTable, and you can add to this or modify it as you require.
 	 * 
 	 * @var string
 	 */
@@ -603,7 +603,7 @@ class DataTables {
 	 * Load the table state. 
 	 * 
 	 * With this function you can define from where, and how, the state of a 
-	 * table is loaded. By default DataTables will load from its state saving 
+	 * table is loaded. By default DataTable will load from its state saving 
 	 * cookie, but you might wish to use local storage (HTML5) or a server-side 
 	 * database.
 	 * 
@@ -626,7 +626,7 @@ class DataTables {
 	
 	/**
 	 * Callback that is called when the state has been loaded from the state 
-	 * saving method and the DataTables settings object has been modified as a 
+	 * saving method and the DataTable settings object has been modified as a 
 	 * result of the loaded state.
 	 * 
 	 * @var string
@@ -660,7 +660,7 @@ class DataTables {
 	/**
 	 * This array allows you to target a specific column, multiple columns, or 
 	 * all columns, using the aTargets property of each object in the array 
-	 * (please note that aoColumnDefs was introduced in DataTables 1.7). 
+	 * (please note that aoColumnDefs was introduced in DataTable 1.7). 
 	 * 
 	 * This allows great flexibility when creating tables, as the aoColumnDefs 
 	 * arrays can be of any length, targeting the columns you specifically 
@@ -1053,7 +1053,7 @@ class DataTables {
 	}
 	
 	/**
-	 * Returns whether retrieval of the DataTables object is enabled or 
+	 * Returns whether retrieval of the DataTable object is enabled or 
 	 * disabled.
 	 * 
 	 * @see $_bRetrieve
@@ -1064,7 +1064,7 @@ class DataTables {
 	}
 	
 	/**
-	 * Sets whether retrieval of the DataTables object is enabled or disabled.
+	 * Sets whether retrieval of the DataTable object is enabled or disabled.
 	 * 
 	 * @see $_bRetrieve
 	 * @param boolean $bRetrieve
@@ -1074,7 +1074,7 @@ class DataTables {
 	}
 	
 	/**
-	 * Returns if DataTables should be allowed to set the padding / margin etc 
+	 * Returns if DataTable should be allowed to set the padding / margin etc 
 	 * for the scrolling header elements or not.
 	 * 
 	 * @see $_bScrollAutoCss
@@ -1085,7 +1085,7 @@ class DataTables {
 	}
 	
 	/**
-	 * Sets if DataTables should be allowed to set the padding / margin etc 
+	 * Sets if DataTable should be allowed to set the padding / margin etc 
 	 * for the scrolling header elements or not.
 	 * 
 	 * @see $_bScrollAutoCss
@@ -1825,7 +1825,7 @@ class DataTables {
 	 * data.
 	 * 
 	 * @param array|Traversable $options
-	 * @return DataTables
+	 * @return DataTable
 	 * @throws Exception if $options is neither an array nor an object 
 	 *   implementing Traversable
 	 * @throws Exception if $options contains a setting for which no setter
