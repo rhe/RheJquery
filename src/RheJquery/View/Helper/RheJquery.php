@@ -142,7 +142,7 @@ class RheJquery extends AbstractHelper {
 				"type=\"text/css\"/>\n";
 		}
 		foreach($this->_javaScriptFiles as $file) {
-			$html.= "<script type=\"text/javascript\" src=\"".$file."></script>\n";
+			$html.= "<script type=\"text/javascript\" src=\"".$file."\"></script>\n";
 		}
 		if(!empty($this->_documentReadySnippets)) {
 			$html.= "<script type=\"text/javascript\">\n";
